@@ -10,6 +10,7 @@ import session from "express-session";
 import env from "dotenv";
 
 const app = express();
+const PgSession = pgSession(session);
 const port = 3000;
 const saltRounds = 10;
 env.config();
@@ -31,7 +32,6 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
 
-const PgSession = pgSession(session);
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL, // Use environment variable for production
   ssl: { rejectUnauthorized: false },  // Required for Render's PostgreSQL,
