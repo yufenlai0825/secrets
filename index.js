@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import pgSession from "connect-pg-simple"; // Import session store
 import bcrypt from "bcrypt";
 import passport from "passport";
 import { Strategy } from "passport-local";
@@ -13,27 +14,28 @@ const port = 3000;
 const saltRounds = 10;
 env.config();
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+app.use(session({
+  store: new PgSession({
+    pool: db, // Use the PostgreSQL connection pool
+    tableName: "session", // Name of the session table
+  }),
+  secret: process.env.SESSION_SECRET || "TOPSECRETWORD",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
+}));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+const PgSession = pgSession(session);
+const db = new pg.Pool({
+  connectionString: process.env.DATABASE_URL, // Use environment variable for production
+  ssl: { rejectUnauthorized: false },  // Required for Render's PostgreSQL,
 });
-db.connect();
 
 app.get("/", (req, res) => {
   res.render("home.ejs");
