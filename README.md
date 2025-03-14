@@ -18,5 +18,5 @@ Install dependencies by npm install. Users can tun the app locally by  npm start
 The app will then run on http://localhost:3000.
 
 📜 Acknowledgment + License
-This project is open-source and available under the MIT License.
-Inspired by Angela Yu's Full-Stack Web Development Bootcamp.
+- This project is open-source and available under the MIT License.
+- Inspired by Angela Yu's Full-Stack Web Development Bootcamp.
