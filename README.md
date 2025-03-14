@@ -10,7 +10,7 @@ Try it now!
 - Authentication: Passport.js, bcrypt, Google OAuth 2.0
 - Frontend: EJS, CSS
 - Backend: Node.js, Express.js
-- Database: PostgreSQL (via pg library) and hosted on render
+- Database: PostgreSQL (via pg library) and hosted on Render
 - Security: Passwords are hashed using bcrypt
 - Deployment: Render
 
