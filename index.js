@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import pgSession from "connect-pg-simple";
 import bcrypt from "bcrypt";
 import passport from "passport";
 import { Strategy } from "passport-local";
@@ -11,6 +12,7 @@ import env from "dotenv";
 const app = express();
 const port = 3000;
 const saltRounds = 10;
+const PgSession = pgSession(session);
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL, // Connect to Render DB
   ssl: { rejectUnauthorized: false },  // Required for Render's PostgreSQL,
@@ -18,6 +20,10 @@ const db = new pg.Pool({
 env.config();
 
 app.use(session({
+  store: new PgSession({
+    pool: db, // Use the PostgreSQL connection pool
+    tableName: "session", // store in this session table
+  }),
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
