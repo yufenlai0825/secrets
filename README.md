@@ -1,5 +1,7 @@
 Secrets App
-This is a simple authentication-based web application where users can securely log-in and submit secrets anonymously. It supports both local authentication (email + password) and Google OAuth authentication.
+
+This is a simple authentication-based web application where users can securely log-in and submit secrets anonymously. 
+It supports both local authentication (email + password) and Google OAuth authentication.
 
 Live Demo on Render: https://secrets-nonb.onrender.com/
 Try it now! 
