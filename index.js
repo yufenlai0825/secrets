@@ -24,10 +24,10 @@ app.use(session({
     pool: db, // Use the PostgreSQL connection pool
     tableName: "session", // Name of the session table
   }),
-  secret: process.env.SESSION_SECRET || "TOPSECRETWORD",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
+  cookie: { maxAge: 24 * 60 * 60 * 1000 },
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
