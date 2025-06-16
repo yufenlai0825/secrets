@@ -36,7 +36,7 @@ https://secrets-nonb.onrender.com/
 | **Backend**        | Node.js, Express. (ES6)                         |
 | **Frontend**      | EJS                                      |
 | **Authentication** | Passport.js, Google OAuth 2.0, bcrypt  |
-| **Database**    | PostgreSQL (via pg)                  |
+| **Database**    | PostgreSQL                  |
 | **Version Control** | Git & GitHub                             |
 | **Deployment**      | Render                                   |
 
